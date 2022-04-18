@@ -19,7 +19,7 @@ namespace Timesheets.Controllers
         {
             return Ok();
         }
-        [HttpPut("add")]
+        [HttpPost("add")]
         public async Task<IActionResult> AddInvoice([FromBody] InvoicesDto contract)
         {
             return Ok();
@@ -29,5 +29,8 @@ namespace Timesheets.Controllers
         {
             return Ok();
         }
+        [HttpPut]
+        public async Task<IActionResult> UpdateInvoice([FromBody] int id) { return Ok(); }
+        //[HttpPost]
     }
 }

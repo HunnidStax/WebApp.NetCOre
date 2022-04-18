@@ -14,7 +14,7 @@ namespace Timesheets.Controllers
         {
             return Ok();
         }
-        [HttpGet("{id}")]
+        [HttpGet("get/{id}")]
         public async Task<IActionResult> GetClient(int id)
         {
             return Ok();
