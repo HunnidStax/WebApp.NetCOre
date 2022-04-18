@@ -1,6 +1,8 @@
-﻿namespace Timesheets.DAL.Repository
+﻿using Timesheets.Interfaces;
+
+namespace Timesheets.DAL.Repository
 {
-    public class InvoiceRepository
+    public class InvoiceRepository : IInvoiceRepository
     {
     }
 }
