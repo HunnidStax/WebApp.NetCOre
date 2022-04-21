@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Timesheets.Controllers.Models;
 using Timesheets.Interfaces;
+using Timesheets.Servises;
 
 namespace Timesheets.Controllers
 {
@@ -21,7 +22,7 @@ namespace Timesheets.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public async Task<IActionResult> GetPerson([FromQuery] PersonDto userParams)
+        public async Task<IActionResult> GetPerson([FromQuery] PersonService userParams)
         {
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
@@ -41,14 +42,14 @@ namespace Timesheets.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
-            var user = await _repo.GetPerson(id);
+            var user = await _repo.GetById(id);
             var userToRetrun = _mapper.Map<PersonDto>(user);
 
             return Ok(userToRetrun);
         }
 
         [HttpPut("{id}", Name = "GetUser")]
-        public async Task<IActionResult> UpdateUser(int id, PersonDto userForUpdateDto)
+        public async Task<IActionResult> UpdateUser(int id, PersonService userForUpdateDto)
         {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
