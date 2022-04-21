@@ -10,7 +10,10 @@ namespace Timesheets.Controllers
     public class EmployeesController : ControllerBase
     {
         [HttpGet("get")]
-        public async Task<IActionResult> GetAllEmmloyees() { return Ok(); }
+        public async Task<IActionResult> GetAllEmmloyees() 
+        {
+            return Ok();
+        }
 
         [HttpGet("get/{id}")]
         public async Task<IActionResult> GetEmployee(int id) { return Ok(); }
