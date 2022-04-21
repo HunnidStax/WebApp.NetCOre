@@ -76,7 +76,8 @@ namespace Timesheets.Controllers
 
             throw new Exception("");
         }
-        /*[HttpGet("persons /{id})")]
+        
+        [HttpGet("persons /{id})")]
         public async Task<ActionResult<PersonDto>> GetById([FromRoute] int id)
         {
             return Ok();
@@ -112,6 +113,6 @@ namespace Timesheets.Controllers
         public async Task<IActionResult> DeleteAsync([FromRoute] int id)
         {
             return Ok();
-        }*/
+        }
     }
 }

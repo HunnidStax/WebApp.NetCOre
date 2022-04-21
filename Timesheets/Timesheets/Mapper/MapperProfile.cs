@@ -1,6 +1,11 @@
-﻿namespace Timesheets.Mapper
+﻿using AutoMapper;
+using Microsoft.Azure.Documents;
+using Timesheets.Controllers.Models;
+
+namespace Timesheets.Mapper
 {
-    public class MapperProfile
+    public class MapperProfile : Profile
     {
+
     }
 }

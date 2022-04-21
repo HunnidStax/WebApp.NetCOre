@@ -6,8 +6,13 @@
 
   <ItemGroup>
     <Folder Include="DAL\Migrations\" />
-    <Folder Include="Mapper\" />
-    <Folder Include="Servises\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.18.0" />
+    <PackageReference Include="Microsoft.ServiceFabric.Services.Remoting" Version="5.2.1571" />
+    <PackageReference Include="ServiceStack.Interfaces" Version="6.0.2" />
   </ItemGroup>
 
 </Project>
