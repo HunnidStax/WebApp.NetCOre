@@ -1,6 +1,6 @@
 ﻿namespace Timesheets.Interfaces
 {
-    public interface IInvoiceRepository : IRepository
+    public interface IInvoiceRepository
     {
     }
 }

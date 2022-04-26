@@ -22,61 +22,61 @@ namespace Timesheets.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public async Task<IActionResult> GetPerson([FromQuery] PersonService userParams)
-        {
-            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+        //public async Task<IActionResult> GetPerson([FromQuery] PersonService userParams)
+        //{
+        //    var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            var userFromRepo = await _repo.GetById(currentUserId);
-            userParams.Id = currentUserId;
+        //    var userFromRepo = await _repo.GetById(currentUserId);
+        //    userParams.Id = currentUserId;
 
-            var users = await _repo.GetById(userParams);
+        //    var users = await _repo.GetById(userParams);
 
-            var usersToRetrun = _mapper.Map<IEnumerable<PersonDto>>(users);
+        //    var usersToRetrun = _mapper.Map<IEnumerable<PersonDto>>(users);
 
-            //Response.AddPagination(users.CurrentPage, users.PageSize,
-                //users.TotalCount, users.TotalPages);
+        //    //Response.AddPagination(users.CurrentPage, users.PageSize,
+        //        //users.TotalCount, users.TotalPages);
 
-            return Ok(usersToRetrun);
-        }
+        //    return Ok(usersToRetrun);
+        //}
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetUser(int id)
-        {
-            var user = await _repo.GetById(id);
-            var userToRetrun = _mapper.Map<PersonDto>(user);
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetUser(int id)
+        //{
+        //    var user = await _repo.GetById(id);
+        //    var userToRetrun = _mapper.Map<PersonDto>(user);
 
-            return Ok(userToRetrun);
-        }
+        //    return Ok(userToRetrun);
+        //}
 
-        [HttpPut("{id}", Name = "GetUser")]
-        public async Task<IActionResult> UpdateUser(int id, PersonService userForUpdateDto)
-        {
-            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized();
+        //[HttpPut("{id}", Name = "GetUser")]
+        //public async Task<IActionResult> UpdateUser(int id, PersonService userForUpdateDto)
+        //{
+        //    if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+        //        return Unauthorized();
 
-            var user = await _repo.GetById(id);
-            _mapper.Map(userForUpdateDto, user);
+        //    var user = await _repo.GetById(id);
+        //    _mapper.Map(userForUpdateDto, user);
 
-            if (await _repo.SaveAll())
-                return NoContent();
+        //    if (await _repo.SaveAll())
+        //        return NoContent();
 
-            throw new Exception("");
-        }
+        //    throw new Exception("");
+        //}
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
-        {
-            var user = _repo.GetById(id);
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteUser(int id)
+        //{
+        //    var user = _repo.GetById(id);
 
-            _repo.Delete(user);
+        //    _repo.Delete(user);
 
-            if (await _repo.SaveAll())
-            {
-                return CreatedAtAction("GetUsers", new { });
-            }
+        //    if (await _repo.SaveAll())
+        //    {
+        //        return CreatedAtAction("GetUsers", new { });
+        //    }
 
-            throw new Exception("");
-        }
+        //    throw new Exception("");
+        //}
         
         [HttpGet("persons /{id})")]
         public async Task<ActionResult<PersonDto>> GetById([FromRoute] int id)

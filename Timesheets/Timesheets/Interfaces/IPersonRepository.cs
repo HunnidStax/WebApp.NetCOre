@@ -1,6 +1,6 @@
 ﻿namespace Timesheets.Interfaces
 {
-    public interface IPersonRepository : IRepository
+    public interface IPersonRepository
     {
     }
 }
