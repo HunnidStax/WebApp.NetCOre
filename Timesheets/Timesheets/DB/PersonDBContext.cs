@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -8,20 +9,19 @@ using Timesheets.Controllers.Models;
 
 namespace Timesheets.DB
 {
-    internal sealed class PersonDBContext : DbContext
+    public class PersonDBContext : DbContext
     {
         public DbSet<PersonDto> Person { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder
         optionsBuilder)
         {
             optionsBuilder
-            .UseNpgsql("Host=;Database=;Username=;Password=; ");
+            .UseSqlServer();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<PersonDto>().Ignore(x => x.Comment);
-
+            modelBuilder.Entity<PersonDto>().Ignore(x => x.Position);
         }
     }
 }

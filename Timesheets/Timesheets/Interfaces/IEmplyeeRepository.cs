@@ -1,6 +1,8 @@
-﻿namespace Timesheets.Interfaces
+﻿using Timesheets.Controllers.Models;
+
+namespace Timesheets.Interfaces
 {
-    public interface IEmplyeeRepository
+    public interface IEmplyeeRepository : IRepository<EmployeeDto>
     {
 
     }

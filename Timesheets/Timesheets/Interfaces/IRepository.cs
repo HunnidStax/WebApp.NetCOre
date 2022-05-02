@@ -4,13 +4,11 @@ namespace Timesheets.Interfaces
 {
     public interface IRepository<T> where T : class
     {
-        IList<T> GetAll();
+        IEnumerable<T> GetAll();
+        bool Create(T item);
 
-        T GetById(int id);
-        void Create(T item);
+        bool Update(T item);
 
-        void Update(T item);
-
-        void Delete(int id);
+        bool Delete(int id);
     }
 }
