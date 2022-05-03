@@ -16,7 +16,7 @@ namespace Timesheets.DB
         optionsBuilder)
         {
             optionsBuilder
-            .UseSqlServer();
+            .UseSqlServer("Server = localhost; Database = Timesheets; User Id = ; Password = ; ");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

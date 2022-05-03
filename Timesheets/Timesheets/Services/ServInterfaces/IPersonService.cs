@@ -1,6 +1,7 @@
 ﻿namespace Timesheets.Services.ServInterfaces
 {
-    public interface IPersonService
-    {
+    public interface IPersonService : IService
+    { 
+
     }
 }
