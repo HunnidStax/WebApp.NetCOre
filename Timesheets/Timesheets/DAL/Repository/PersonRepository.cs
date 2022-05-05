@@ -9,8 +9,8 @@ namespace Timesheets.DAL.Repository
 {
     public class PersonRepository : IPersonRepository
     {
-        private readonly PersonDBContext _context;
-        public PersonRepository(PersonDBContext context)
+        private readonly DBHelper _context;
+        public PersonRepository(DBHelper context)
         {
             _context = context;
         }

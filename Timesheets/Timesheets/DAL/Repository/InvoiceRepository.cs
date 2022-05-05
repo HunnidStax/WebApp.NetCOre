@@ -6,7 +6,7 @@ namespace Timesheets.DAL.Repository
     {
         private readonly InvoiceDBContext _invoiceContext;
 
-        public InvoiceRepository(In)
+        public InvoiceRepository()
 
     }
 }

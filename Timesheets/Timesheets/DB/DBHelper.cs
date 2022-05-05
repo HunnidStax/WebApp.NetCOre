@@ -9,7 +9,7 @@ using Timesheets.Controllers.Models;
 
 namespace Timesheets.DB
 {
-    public class PersonDBContext : DbContext
+    public class DBHelper : DbContext
     {
         public DbSet<PersonDto> Person { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder

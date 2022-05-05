@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Timesheets.Controllers.Models
 {
+    [Table("Invoice", Schema - "Timesheets")]
     public class InvoicesDto
     {
         [Column("Id")]
