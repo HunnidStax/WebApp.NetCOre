@@ -2,8 +2,7 @@
 
 namespace Timesheets.Interfaces
 {
-    public interface IInvoiceRepository : IRepository<InvoicesDto>
+    public interface IClientRepository : IRepository<ClientDto>
     {
-
     }
 }
