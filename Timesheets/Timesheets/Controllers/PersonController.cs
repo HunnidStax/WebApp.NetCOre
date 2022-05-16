@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Timesheets.Controllers.Models;
 using Timesheets.Interfaces;
+using Timesheets.Responces;
+using Timesheets.Services.ServInterfaces;
 using Timesheets.Servises;
 
 namespace Timesheets.Controllers
@@ -16,12 +19,61 @@ namespace Timesheets.Controllers
         private IPersonRepository _repo;
         private IMapper _mapper;
 
-        public PersonController(IPersonRepository repo, IMapper mapper)
+        //public PersonController(IPersonRepository repo, IMapper mapper)
+        //{
+        //    _repo = repo;
+        //    _mapper = mapper;
+        //}
+
+        private readonly IService _personService;
+        public PersonController(IService personService)
         {
-            _repo = repo;
-            _mapper = mapper;
+            _personService = personService;
         }
-        [HttpGet]
+
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate([FromQuery] string user, string password)
+        {
+            TokenResponse token = _personService.Authenticate(user,
+            password);
+            if (token is null)
+            {
+                return BadRequest(new
+                {
+                    message = "Username or password is incorrect"
+                });
+            }
+            SetTokenCookie(token.RefreshToken);
+            return Ok(token);
+        }
+
+        [Authorize]
+        [HttpPost("refresh-token")]
+        public IActionResult Refresh()
+        {
+            string oldRefreshToken = Request.Cookies["refreshToken"];
+            string newRefreshToken =
+            _personService.RefreshToken(oldRefreshToken);
+
+            if (string.IsNullOrWhiteSpace(newRefreshToken))
+            {
+                return Unauthorized(new { message = "Invalid token" });
+            }
+            SetTokenCookie(newRefreshToken);
+            return Ok(newRefreshToken);
+        }
+
+        private void SetTokenCookie(string token)
+        {
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = DateTime.UtcNow.AddDays(7)
+            };
+            Response.Cookies.Append("refreshToken", token, cookieOptions);
+        }
+        //[HttpGet]
         //public async Task<IActionResult> GetPerson([FromQuery] PersonService userParams)
         //{
         //    var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
@@ -77,7 +129,7 @@ namespace Timesheets.Controllers
 
         //    throw new Exception("");
         //}
-        
+
         [HttpGet("persons /{id})")]
         public async Task<ActionResult<PersonDto>> GetById([FromRoute] int id)
         {
